@@ -49,15 +49,12 @@ export default {
   },
   methods: {
     inputValue(value) {
-      if (this.currentCalculate === '0') {
-        this.currentCalculate = '';
-      }
-
+      
       const operators = ['+', '-', '*', '/'];
       const lastChar = this.currentCalculate.slice(-1);
-
-      if (operators.includes(value) && this.currentCalculate === '') {
-        return;
+      
+      if (this.currentCalculate === '0') {
+        this.currentCalculate = '';
       }
 
       if (operators.includes(value)) {
@@ -83,6 +80,11 @@ export default {
         const outputQueue = [];
         const operatorStack = [];
         const tokens = expr.match(/\d+|\+|\-|\*|\//g);
+
+        if (tokens[0] === '-') {
+                tokens[1] = '-' + tokens[1];
+                tokens.shift();
+            }
 
         tokens.forEach((token) => {
           if (!isNaN(token)) {
