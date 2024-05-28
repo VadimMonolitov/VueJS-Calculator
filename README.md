@@ -1,3 +1,3 @@
 # VueJS-Calculator
 
-BackSpace - Очистка input в калькуляторе
+Backspace - Очистка input в калькуляторе
