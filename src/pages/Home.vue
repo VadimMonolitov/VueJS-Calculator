@@ -1,7 +1,5 @@
 <template>
-    <div>
         <router-link to="/calculator" class="main__btn">Перейти к калькулятору</router-link>
-    </div>
 </template>
 
 <script>

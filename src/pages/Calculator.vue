@@ -42,17 +42,16 @@ export default {
   data() {
     return {
       currentCalculate: '0',
-      lastOperation: '0',
       result: '',
 
     };
   },
   methods: {
     inputValue(value) {
-      
+
       const operators = ['+', '-', '*', '/'];
       const lastChar = this.currentCalculate.slice(-1);
-      
+
       if (this.currentCalculate === '0') {
         this.currentCalculate = '';
       }
@@ -75,24 +74,22 @@ export default {
         '/': 2,
       };
 
-      const isOperator = (c) => ['+', '-', '*', '/'].includes(c);
       const toRPN = (expr) => {
         const outputQueue = [];
         const operatorStack = [];
         const tokens = expr.match(/\d+|\+|\-|\*|\//g);
 
         if (tokens[0] === '-') {
-                tokens[1] = '-' + tokens[1];
-                tokens.shift();
-            }
+          tokens[1] = '-' + tokens[1];
+          tokens.shift();
+        }
 
         tokens.forEach((token) => {
           if (!isNaN(token)) {
             outputQueue.push(token);
-          } else if (isOperator(token)) {
+          } else if (precedence[token]) {
             while (
               operatorStack.length &&
-              isOperator(operatorStack[operatorStack.length - 1]) &&
               precedence[token] <= precedence[operatorStack[operatorStack.length - 1]]
             ) {
               outputQueue.push(operatorStack.pop());
@@ -135,12 +132,12 @@ export default {
           }
         });
         return stack.pop();
-
       };
 
       const rpn = toRPN(expression);
       return evaluateRPN(rpn);
     },
+
     equal() {
       this.result = this.calculate(this.currentCalculate);
       const historyStore = useHistoryStore();
@@ -178,9 +175,7 @@ export default {
   border: 1px solid black;
   border-radius: 20px;
   max-width: 400px;
-  margin: auto;
-  margin-top: 10px;
-
+  margin: 10px auto auto auto;
 }
 
 input {

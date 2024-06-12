@@ -18,16 +18,19 @@
 import { useHistoryStore } from '@/stores/history';
 
 export default {
+    data() {
+        return {
+            historyStore: useHistoryStore()
+        };
+    },
     computed: {
         calcHistory() {
-            const historyStore = useHistoryStore();
-            return historyStore.history;
+            return this.historyStore.history;
         }
     },
     methods: {
         clearHistory() {
-            const historyStore = useHistoryStore();
-            historyStore.clearHistory();
+            this.historyStore.clearHistory();
         }
     }
 };
@@ -36,15 +39,13 @@ export default {
 <style lang="scss" scoped>
 .main {
     flex-direction: column;
-    padding-bottom: 20px;
     align-items: center;
     border: 1px solid black;
     height: 561px;
     padding: 20px;
     border-radius: 20px;
     max-width: 400px;
-    margin: auto;
-    margin-top: 10px;
+    margin:10px auto auto auto;
 }
 
 .backToCalc {

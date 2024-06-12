@@ -1,7 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@/pages/Home.vue'
-import Calculator from '@/pages/Calculator.vue'
-import ComputedHistory from '@/pages/ComputedHistory.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -9,17 +6,17 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: () => import('@/pages/Home.vue')
     },
     {
       path: '/calculator',
       name: 'calc',
-      component: Calculator
+      component: () => import('@/pages/Calculator.vue')
     },
     {
       path: '/history',
       name: 'computed-history',
-      component: ComputedHistory
+      component: () => import('@/pages/ComputedHistory.vue')
     },
     
   ]
