@@ -4,13 +4,13 @@
             <div class="arrow"></div> История вычислений
         </router-link>
         <div class="historyContainer">
-            <div class="historyCalc" v-for="calc in calcHistory">
+            <div class="historyCalc" v-for="calc in historyStore.history">
                 <div class="operation">
                     {{ calc.operation }}<span style="color: orange">{{ calc.result }}</span></div>
                 <div class="date">{{ calc.date }}</div>
             </div>
         </div>
-        <button class="clear__btn" @click="clearHistory" v-if="calcHistory.length > 0">Очистить</button>
+        <button class="clear__btn" @click="clearHistory" v-if="historyStore.history.length > 0">Очистить</button>
     </div>
 </template>
 
@@ -22,11 +22,6 @@ export default {
         return {
             historyStore: useHistoryStore()
         };
-    },
-    computed: {
-        calcHistory() {
-            return this.historyStore.history;
-        }
     },
     methods: {
         clearHistory() {
